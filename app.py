@@ -29,22 +29,5 @@ def get_worst_winners():
     
     return json.jsonify(result)
 
-# @app.route('/')
-# def index():
-#     return render_template(template_name_or_list='index.html', todos=todos)
-
-# @app.route('/create', methods=['POST'])
-# def create():
-#     todo = request.form
-#     todos.append(todo)
-
-#     return redirect(url_for('index'))
-
-# @app.route('/delete/<int:id>', methods=['DELETE'])
-# def delete():
-#     del todos
-
-#     return redirect(url_for('index'))
-
 if __name__ == '__main__':
     app.run(debug=True)
