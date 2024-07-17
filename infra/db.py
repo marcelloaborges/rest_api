@@ -53,6 +53,10 @@ class DBManager():
         # year;title;studios;producers;winner
         # 1980;Can't Stop the Music;Associated Film Distribution;Allan Carr;yes                
 
+        self._create_table_movies()
+        self._initialize_movies_table(datafile_url)
+
+    def _create_table_movies(self):
         # CREATE MOVIES TABLE
         create_table_movies_command = """
         CREATE TABLE IF NOT EXISTS
@@ -64,11 +68,11 @@ class DBManager():
             producers TEXT,
             winner INTEGER
         )
-
         """
 
         self.execute_command(create_table_movies_command)
 
+    def _initialize_movies_table(self, datafile_url:str):
         # INSERT MOVIES
         with open(datafile_url, 'r') as fin:
             dr = csv.DictReader(fin, delimiter=";")
@@ -93,5 +97,4 @@ class DBManager():
             )
         """
 
-        self.execute_many(insert_movies_command, obj_list)        
-    
+        self.execute_many(insert_movies_command, obj_list)  

@@ -1,4 +1,4 @@
-from db import DBManager
+from infra.db import DBManager
 
 class MoviesManager():
 

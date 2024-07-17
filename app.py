@@ -1,6 +1,6 @@
 from flask import Flask, json
-from db import DBManager
-from movies import MoviesManager
+from infra.db import DBManager
+from domain.movies import MoviesManager
 
 DB_URL = './data/movies.db'
 DATAFILE_URL = './data/movieslist.csv'
