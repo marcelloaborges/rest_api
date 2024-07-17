@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for, send_from_directory, redirect, json
+from flask import Flask, json
 from db import DBManager
 from movies import MoviesManager
 
@@ -46,6 +46,5 @@ def get_worst_winners():
 
 #     return redirect(url_for('index'))
 
-if __name__ == '__main__':    
-
+if __name__ == '__main__':
     app.run(debug=True)
