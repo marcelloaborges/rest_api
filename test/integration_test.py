@@ -1,12 +1,15 @@
 import unittest
-from app import app
-import json
+from app import app, db_manager
+from infra import db
+
+DB_URL = './data/movies.db'
+DATAFILE_URL = './data/movieslist.csv'
 
 class FlaskIntegrationTestCase(unittest.TestCase):
 
     def setUp(self):
         app.config["TESTING"] = True
-        self.client = app.test_client()
+        self.client = app.test_client()        
 
     def test_movies_worst_winners(self):
         response = self.client.get("/movies/worst_winners")
@@ -58,3 +61,13 @@ class FlaskIntegrationTestCase(unittest.TestCase):
                     continue
                 if previous_interval_value != min_winners["interval"]:
                     raise ValueError("Winner max movies must have the same interval")
+
+    def test_db_create_successfully_with_movies(self):
+        sql_command = """
+            SELECT * FROM movies
+        """
+        
+        result = db_manager.execute_query(sql_command)
+
+        self.assertGreater(len(result), 0)
+        

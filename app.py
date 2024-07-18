@@ -5,17 +5,9 @@ from domain.movies import MoviesManager
 DB_URL = './data/movies.db'
 DATAFILE_URL = './data/movieslist.csv'
 
+app = Flask(__name__)
 db_manager = DBManager(DB_URL)
-
-def create_app():
-    app = Flask(__name__)
-
-    db_manager = DBManager(DB_URL)
-    db_manager.init_db(DATAFILE_URL)
-
-    return app
-
-app = create_app()
+db_manager.init_db(DATAFILE_URL)
 
 @app.route('/')
 def index():
