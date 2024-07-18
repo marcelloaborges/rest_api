@@ -5,6 +5,12 @@ class DBManager():
 
     def __init__(self, db_url:str):
         self._db_url = db_url    
+                
+        # DROP THE EXISTING DATABASE IF EXISTS
+        try:
+            os.remove(self._db_url)
+        except OSError:
+            pass
 
         # CREATE DB FILE
         connection = sqlite3.connect(self._db_url)    
@@ -41,14 +47,7 @@ class DBManager():
 
         connection.close()
 
-    def init_db(self, datafile_url:str):    
-
-        # DROP THE EXISTING DATABASE IF NECESSARY
-        try:
-            os.remove(self._db_url)
-        except OSError:
-            pass
-
+    def init_db(self, datafile_url:str):
         # DATA SAMPLE
         # year;title;studios;producers;winner
         # 1980;Can't Stop the Music;Associated Film Distribution;Allan Carr;yes                

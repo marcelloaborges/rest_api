@@ -1,6 +1,6 @@
 import unittest
 from app import app, db_manager
-from infra import db
+from infra.db import DBManager
 
 DB_URL = './data/movies.db'
 DATAFILE_URL = './data/movieslist.csv'
@@ -11,7 +11,20 @@ class FlaskIntegrationTestCase(unittest.TestCase):
         app.config["TESTING"] = True
         self.client = app.test_client()        
 
+    def test_movies_worst_winners_not_found(self):
+        db_manager = DBManager(DB_URL)        
+        db_manager._create_table_movies()
+
+        response = self.client.get("/movies/worst_winners")
+
+        self.assertEqual(response.status_code, second=404)
+        self.assertEqual(response.content_type, second='text/html; charset=utf-8')
+        self.assertEqual(response.text, second='Data not found')        
+
     def test_movies_worst_winners(self):
+        db_manager = DBManager(DB_URL)
+        db_manager.init_db(DATAFILE_URL)
+
         response = self.client.get("/movies/worst_winners")
 
         self.assertEqual(response.status_code, second=200)

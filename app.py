@@ -20,6 +20,9 @@ def get_worst_winners():
     movies_manager = MoviesManager()
     result = movies_manager.get_worst_winners(db_manager)
     
+    if len(result["min"]) == 0 or len(result["max"]) == 0:
+        return "Data not found", 404
+
     return json.jsonify(result)
 
 if __name__ == '__main__':

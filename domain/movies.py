@@ -15,7 +15,7 @@ class MoviesManager():
     def get_worst_winners(self, db_manager: DBManager) -> list:
         command = """
             SELECT * FROM MOVIES
-            WHERE winner = 1
+            WHERE winner = 1            
             ORDER BY year
         """
 
