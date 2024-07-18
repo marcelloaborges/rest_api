@@ -10,6 +10,7 @@ db_manager = DBManager(DB_URL)
 def create_app():
     app = Flask(__name__)
 
+    db_manager = DBManager(DB_URL)
     db_manager.init_db(DATAFILE_URL)
 
     return app
